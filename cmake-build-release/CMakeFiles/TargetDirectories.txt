@@ -1,0 +1,4 @@
+E:/prog/clion_proj/image_transform/cmake-build-release/CMakeFiles/image_transform.dir
+E:/prog/clion_proj/image_transform/cmake-build-release/CMakeFiles/edit_cache.dir
+E:/prog/clion_proj/image_transform/cmake-build-release/CMakeFiles/rebuild_cache.dir
+E:/prog/clion_proj/image_transform/cmake-build-release/CMakeFiles/image_transform_autogen.dir
