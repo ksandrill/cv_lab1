@@ -67,8 +67,8 @@ void MainWindow::onPressLoadImage() {
 
     QImage image = reader.read();
     image = image.scaled(imageViewer->width(), imageViewer->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    hsvSlider->setImage(image.copy());
-    hsvSlider->setOriginalImage(image.copy());
+    hsvSlider->setImage(image);
+    hsvSlider->setOriginalImage(image);
     hsvSlider->resetSliders();
     imageViewer->setPixmap(QPixmap::fromImage(image));
 
