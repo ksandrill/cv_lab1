@@ -50,7 +50,6 @@ void HsvSlider::setHue(int hue) {
     if (this->hue == hue)
         return;
     this->hue = hue;
-    qDebug() << "hue" << this->hue;
     emit hueChanged(hue);
 }
 
@@ -58,7 +57,6 @@ void HsvSlider::setSaturation(int saturation) {
     if (this->saturation == saturation)
         return;
     this->saturation = saturation;
-    qDebug() << "saturation" << this->saturation;
 
     emit saturationChanged(saturation);
 
@@ -69,7 +67,6 @@ void HsvSlider::setValue(int value) {
         return;
     }
     this->value = value;
-    qDebug() << "value" << this->value;
     emit valueChanged(value);
 
 }
