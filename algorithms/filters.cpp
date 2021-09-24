@@ -99,9 +99,17 @@ double gaborFunc(double xSh, double ySh, double lambda, double gama, double phi,
     return exp(-(pow(xSh, 2) + gama * pow(ySh, 2)) / (2 * pow(sigma, 2))) * cos(2 * M_PI * xSh / lambda + phi);
 }
 
+int fit(int min, int max, int val) {
+    if (val < min) {
+        val = min;
+    } else if (val > max) {
+        val = max;
+    }
+    return val;
+}
+
 QImage
-Filters::gaborFilter(const QImage &inputImg, double lambda, double theta, double phi, double gama, int kernelSize,
-                     int threshold) {
+Filters::gaborFilter(const QImage &inputImg, double lambda, double theta, double phi, double gama, int kernelSize) {
     QImage outImg = inputImg.copy();
     double gaborKernel[kernelSize][kernelSize];
     int center = kernelSize / 2;
@@ -129,19 +137,27 @@ Filters::gaborFilter(const QImage &inputImg, double lambda, double theta, double
     for (int j = 0; j < y_len; ++j) {
         int x_out = 1;
         for (int i = 0; i < x_len; ++i) {
-            double convSum = 0;
+            ////double convSum = 0;
+            double r_sum = 0;
+            double g_sum = 0;
+            double b_sum = 0;
             for (int kernel_j = 0; kernel_j < kernelSize; ++kernel_j) {
                 for (int kernel_i = 0; kernel_i < kernelSize; ++kernel_i) {
                     QColor pixel = inputImg.pixelColor(i + kernel_i, j + kernel_j);
-                    double grayScale = pixel.red() * 0.299 + pixel.green() * 0.587 + pixel.blue() * 0.114;
-                    convSum += grayScale * gaborKernel[kernel_i][kernel_j];
+                    ////double grayScale = pixel.red() * 0.299 + pixel.green() * 0.587 + pixel.blue() * 0.114;
+                    ////convSum += grayScale * gaborKernel[kernel_i][kernel_j];
+                    r_sum += pixel.red() * gaborKernel[kernel_i][kernel_j];
+                    g_sum += pixel.green() * gaborKernel[kernel_i][kernel_j];
+                    b_sum += pixel.blue() * gaborKernel[kernel_i][kernel_j];
                 }
             }
-            int value = int(convSum);
-            //// qDebug() << value;
-            value = value > threshold ? 255 : 0;
+            ////auto value = fit(0, 255, int(convSum));
+            auto r_value = fit(0, 255, int(r_sum));
+            auto g_value = fit(0, 255, int(g_sum));
+            auto b_value = fit(0, 255, int(b_sum));
+
             outImg.setPixel(x_out, y_out,
-                            QColor(value, value, value).rgb());
+                            QColor(r_value, g_value, b_value).rgb());
             x_out++;
         }
         y_out++;

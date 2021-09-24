@@ -105,7 +105,7 @@ void MainWindow::onPressSaveImage() {
 
 void MainWindow::onPressGabor() {
     qDebug() << "Gabor";
-    ParamDialog dlg(this, QString("lambda, theta, phi,gama,kernel_size, threshold"));
+    ParamDialog dlg(this, QString("lambda, theta, phi,gama,kernel_size"));
     switch (dlg.exec()) {
         case QDialog::Accepted: {
             auto params = dlg.getEditStr()->text().split(",");
@@ -114,9 +114,7 @@ void MainWindow::onPressGabor() {
             auto phi = params[2].toDouble();
             auto gama = params[3].toDouble();
             auto kernelSize = params[4].toInt();
-            auto threshold = params[5].toInt();
-            auto outImg = Filters::gaborFilter(imageViewer->pixmap().toImage(), lambda, theta, phi, gama, kernelSize,
-                                               threshold);
+            auto outImg = Filters::gaborFilter(imageViewer->pixmap().toImage(), lambda, theta, phi, gama, kernelSize);
             imageViewer->setPixmap(QPixmap::fromImage(outImg));
             hsvSlider->setOriginalImage(outImg);
             hsvSlider->setImage(outImg);

@@ -13,6 +13,5 @@ namespace Filters {
 
     QImage gaussFilter(const QImage &inputImg, double sigma, int kernelSize);
 
-    QImage gaborFilter(const QImage &inputImg, double lambda, double theta, double phi, double gama, int kernelSize,
-                       int threshold = 255);
+    QImage gaborFilter(const QImage &inputImg, double lambda, double theta, double phi, double gama, int kernelSize);
 }
