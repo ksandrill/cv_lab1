@@ -95,3 +95,60 @@ QImage Filters::gaussFilter(const QImage &inputImg, double sigma, int kernelSize
 }
 
 
+double gaborFunc(double xSh, double ySh, double lambda, double gama, double phi, double sigma) {
+    return exp(-(pow(xSh, 2) + gama * pow(ySh, 2)) / (2 * pow(sigma, 2))) * cos(2 * M_PI * xSh / lambda + phi);
+}
+
+QImage
+Filters::gaborFilter(const QImage &inputImg, double lambda, double theta, double phi, double gama, int kernelSize,
+                     int threshold) {
+    QImage outImg = inputImg.copy();
+    double gaborKernel[kernelSize][kernelSize];
+    int center = kernelSize / 2;
+    double sigma = 0.56 * lambda;
+    double radTheta = theta * M_PI / 180;
+    double sum = 0;
+    for (auto i = 0; i < kernelSize; ++i) {
+        int xPos = i - center;
+        for (auto j = 0; j < kernelSize; ++j) {
+            int yPos = j - center;
+            double xSh = xPos * cos(radTheta) + yPos * sin(radTheta);
+            double ySh = -xPos * sin(radTheta) + yPos * cos(radTheta);
+            gaborKernel[i][j] = gaborFunc(xSh, ySh, lambda, gama, phi, sigma);
+            sum += gaborKernel[i][j];
+        }
+    }
+    for (auto i = 0; i < kernelSize; ++i) {
+        for (auto j = 0; j < kernelSize; ++j) {
+            gaborKernel[i][j] /= sum;
+        }
+    }
+    int x_len = inputImg.width() - kernelSize + 1;
+    int y_len = inputImg.height() - kernelSize + 1;
+    int y_out = 1;
+    for (int j = 0; j < y_len; ++j) {
+        int x_out = 1;
+        for (int i = 0; i < x_len; ++i) {
+            double convSum = 0;
+            for (int kernel_j = 0; kernel_j < kernelSize; ++kernel_j) {
+                for (int kernel_i = 0; kernel_i < kernelSize; ++kernel_i) {
+                    QColor pixel = inputImg.pixelColor(i + kernel_i, j + kernel_j);
+                    double grayScale = pixel.red() * 0.299 + pixel.green() * 0.587 + pixel.blue() * 0.114;
+                    convSum += grayScale * gaborKernel[kernel_i][kernel_j];
+                }
+            }
+            int value = int(convSum);
+            //// qDebug() << value;
+            value = value > threshold ? 255 : 0;
+            outImg.setPixel(x_out, y_out,
+                            QColor(value, value, value).rgb());
+            x_out++;
+        }
+        y_out++;
+    }
+
+
+    return outImg;
+}
+
+

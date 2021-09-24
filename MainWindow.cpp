@@ -105,12 +105,23 @@ void MainWindow::onPressSaveImage() {
 
 void MainWindow::onPressGabor() {
     qDebug() << "Gabor";
-    ParamDialog dlg(this, QString("gabor param"));
-    connect(&dlg, SIGNAL(applied()), SLOT(onApplied()));
+    ParamDialog dlg(this, QString("lambda, theta, phi,gama,kernel_size, threshold"));
     switch (dlg.exec()) {
-        case QDialog::Accepted:
-            qDebug() << "Accepted";
+        case QDialog::Accepted: {
+            auto params = dlg.getEditStr()->text().split(",");
+            auto lambda = params[0].toDouble();
+            auto theta = params[1].toDouble();
+            auto phi = params[2].toDouble();
+            auto gama = params[3].toDouble();
+            auto kernelSize = params[4].toInt();
+            auto threshold = params[5].toInt();
+            auto outImg = Filters::gaborFilter(imageViewer->pixmap().toImage(), lambda, theta, phi, gama, kernelSize,
+                                               threshold);
+            imageViewer->setPixmap(QPixmap::fromImage(outImg));
+            hsvSlider->setOriginalImage(outImg);
+            hsvSlider->setImage(outImg);
             break;
+        }
         case QDialog::Rejected:
             qDebug() << "Rejected";
             break;
