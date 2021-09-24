@@ -2,3 +2,4 @@
 #include "EWIEGA46WW/moc_HsvSlider.cpp"
 #include "EWIEGA46WW/moc_LabImageViewer.cpp"
 #include "EWIEGA46WW/moc_MainWindow.cpp"
+#include "EWIEGA46WW/moc_ParamDialog.cpp"

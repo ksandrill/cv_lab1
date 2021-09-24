@@ -23,25 +23,28 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    const uint offsetsAndSize[14];
-    char stringdata0[89];
+    const uint offsetsAndSize[18];
+    char stringdata0[120];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 10), // "MainWindow"
-QT_MOC_LITERAL(11, 16), // "onPressHistogram"
-QT_MOC_LITERAL(28, 0), // ""
-QT_MOC_LITERAL(29, 16), // "onPressLoadImage"
-QT_MOC_LITERAL(46, 16), // "onPressSaveImage"
-QT_MOC_LITERAL(63, 12), // "onPressGabor"
-QT_MOC_LITERAL(76, 12) // "onPressSobel"
+QT_MOC_LITERAL(11, 17), // "onPressResetImage"
+QT_MOC_LITERAL(29, 0), // ""
+QT_MOC_LITERAL(30, 16), // "onPressHistogram"
+QT_MOC_LITERAL(47, 16), // "onPressLoadImage"
+QT_MOC_LITERAL(64, 16), // "onPressSaveImage"
+QT_MOC_LITERAL(81, 12), // "onPressGabor"
+QT_MOC_LITERAL(94, 12), // "onPressSobel"
+QT_MOC_LITERAL(107, 12) // "onPressGauss"
 
     },
-    "MainWindow\0onPressHistogram\0\0"
-    "onPressLoadImage\0onPressSaveImage\0"
-    "onPressGabor\0onPressSobel"
+    "MainWindow\0onPressResetImage\0\0"
+    "onPressHistogram\0onPressLoadImage\0"
+    "onPressSaveImage\0onPressGabor\0"
+    "onPressSobel\0onPressGauss"
 };
 #undef QT_MOC_LITERAL
 
@@ -51,7 +54,7 @@ static const uint qt_meta_data_MainWindow[] = {
        9,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -59,13 +62,17 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x08,    0 /* Private */,
-       3,    0,   45,    2, 0x08,    1 /* Private */,
-       4,    0,   46,    2, 0x08,    2 /* Private */,
-       5,    0,   47,    2, 0x08,    3 /* Private */,
-       6,    0,   48,    2, 0x08,    4 /* Private */,
+       1,    0,   56,    2, 0x08,    0 /* Private */,
+       3,    0,   57,    2, 0x08,    1 /* Private */,
+       4,    0,   58,    2, 0x08,    2 /* Private */,
+       5,    0,   59,    2, 0x08,    3 /* Private */,
+       6,    0,   60,    2, 0x08,    4 /* Private */,
+       7,    0,   61,    2, 0x08,    5 /* Private */,
+       8,    0,   62,    2, 0x08,    6 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -81,11 +88,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->onPressHistogram(); break;
-        case 1: _t->onPressLoadImage(); break;
-        case 2: _t->onPressSaveImage(); break;
-        case 3: _t->onPressGabor(); break;
-        case 4: _t->onPressSobel(); break;
+        case 0: _t->onPressResetImage(); break;
+        case 1: _t->onPressHistogram(); break;
+        case 2: _t->onPressLoadImage(); break;
+        case 3: _t->onPressSaveImage(); break;
+        case 4: _t->onPressGabor(); break;
+        case 5: _t->onPressSobel(); break;
+        case 6: _t->onPressGauss(); break;
         default: ;
         }
     }
@@ -100,7 +109,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
 
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -127,13 +136,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

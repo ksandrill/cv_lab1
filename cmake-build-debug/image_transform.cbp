@@ -154,6 +154,18 @@
 		<Unit filename="E:/prog/clion_proj/image_transform/MainWindow.h">
 			<Option target="image_transform"/>
 		</Unit>
+		<Unit filename="E:/prog/clion_proj/image_transform/ParamDialog.cpp">
+			<Option target="image_transform"/>
+		</Unit>
+		<Unit filename="E:/prog/clion_proj/image_transform/ParamDialog.h">
+			<Option target="image_transform"/>
+		</Unit>
+		<Unit filename="E:/prog/clion_proj/image_transform/algorithms/filters.cpp">
+			<Option target="image_transform"/>
+		</Unit>
+		<Unit filename="E:/prog/clion_proj/image_transform/algorithms/filters.h">
+			<Option target="image_transform"/>
+		</Unit>
 		<Unit filename="E:/prog/clion_proj/image_transform/cmake-build-debug/image_transform_autogen/mocs_compilation.cpp">
 			<Option target="image_transform"/>
 		</Unit>

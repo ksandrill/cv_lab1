@@ -273,6 +273,18 @@
 			null
 		],
 		[
+			"E:/prog/clion_proj/image_transform/ParamDialog.h",
+			"MU",
+			"EWIEGA46WW/moc_ParamDialog.cpp",
+			null
+		],
+		[
+			"E:/prog/clion_proj/image_transform/algorithms/filters.h",
+			"MU",
+			"3GWYZJVA2L/moc_filters.cpp",
+			null
+		],
+		[
 			"E:/prog/clion_proj/image_transform/colorsScheme.h",
 			"MU",
 			"EWIEGA46WW/moc_colorsScheme.cpp",
@@ -351,6 +363,12 @@
 		[ "E:/prog/clion_proj/image_transform/HsvSlider.cpp", "MU", null ],
 		[ "E:/prog/clion_proj/image_transform/LabImageViewer.cpp", "MU", null ],
 		[ "E:/prog/clion_proj/image_transform/MainWindow.cpp", "MU", null ],
+		[ "E:/prog/clion_proj/image_transform/ParamDialog.cpp", "MU", null ],
+		[
+			"E:/prog/clion_proj/image_transform/algorithms/filters.cpp",
+			"MU",
+			null
+		],
 		[ "E:/prog/clion_proj/image_transform/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

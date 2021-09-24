@@ -18,7 +18,14 @@ private:
     LabImageViewer *imageViewer;
     HsvSlider *hsvSlider;
     QPushButton *histogramButton;
+    QPixmap origPixmap;
 
+public:
+    const QPixmap &getOrigPixmap() const;
+
+    void setOrigPixmap(const QPixmap &origPixmap);
+
+private:
 
     void showMessageBox(const QString &msgText);
 
@@ -27,6 +34,7 @@ public:
     ////~MainWindow() = default;
 
 private slots:
+    void onPressResetImage();
     void onPressHistogram();
 
     void onPressLoadImage();
@@ -36,6 +44,8 @@ private slots:
     void onPressGabor();
 
     void onPressSobel();
+
+    void onPressGauss();
 
 
 };

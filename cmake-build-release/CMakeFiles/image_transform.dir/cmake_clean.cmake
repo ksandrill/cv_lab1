@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/image_transform.dir/HsvSlider.cpp.obj"
   "CMakeFiles/image_transform.dir/LabImageViewer.cpp.obj"
   "CMakeFiles/image_transform.dir/MainWindow.cpp.obj"
+  "CMakeFiles/image_transform.dir/ParamDialog.cpp.obj"
+  "CMakeFiles/image_transform.dir/algorithms/filters.cpp.obj"
   "CMakeFiles/image_transform.dir/image_transform_autogen/mocs_compilation.cpp.obj"
   "CMakeFiles/image_transform.dir/main.cpp.obj"
   "CMakeFiles/image_transform_autogen.dir/AutogenUsed.txt"

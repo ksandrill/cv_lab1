@@ -18,7 +18,7 @@ find_package(Qt6 COMPONENTS
         Charts
         REQUIRED)
 
-add_executable(image_transform main.cpp MainWindow.cpp MainWindow.h LabImageViewer.cpp LabImageViewer.h colorsScheme.h HsvSlider.cpp HsvSlider.h)
+add_executable(image_transform main.cpp MainWindow.cpp MainWindow.h LabImageViewer.cpp LabImageViewer.h colorsScheme.h HsvSlider.cpp HsvSlider.h algorithms/filters.cpp algorithms/filters.h ParamDialog.cpp ParamDialog.h)
 target_link_libraries(image_transform
         Qt::Core
         Qt::Gui

@@ -14,6 +14,8 @@
 #include <QProcess>
 #include <fstream>
 #include <QImageWriter>
+#include "algorithms/filters.h"
+#include "ParamDialog.h"
 
 MainWindow::MainWindow(const QString &title, int minW, int minH, QWidget *parent) : QMainWindow(parent) {
     qDebug() << "main_window_size: " << this->size();
@@ -34,18 +36,24 @@ MainWindow::MainWindow(const QString &title, int minW, int minH, QWidget *parent
     imageMenu = menuBar()->addMenu("image");
     auto *saveImage = new QAction("save image", this);
     auto *loadImage = new QAction("load image", this);
+    auto *resetImage = new QAction("reset image", this);
+    connect(resetImage, &QAction::triggered, this, &MainWindow::onPressResetImage);
     connect(saveImage, &QAction::triggered, this, &MainWindow::onPressSaveImage);
     connect(loadImage, &QAction::triggered, this, &MainWindow::onPressLoadImage);
     imageMenu->addAction(loadImage);
     imageMenu->addAction(saveImage);
+    imageMenu->addAction(resetImage);
     QMenu *filterMenu;
     filterMenu = menuBar()->addMenu("filters");
-    auto *sobelOperator = new QAction("Sobel operator");
-    auto *gaborOperator = new QAction("Gabor operator");
+    auto *sobelOperator = new QAction("Sobel operator", this);
+    auto *gaborOperator = new QAction("Gabor operator", this);
+    auto *gaussOperator = new QAction("Gauss operator", this);
+    connect(gaussOperator, &QAction::triggered, this, &MainWindow::onPressGauss);
     connect(sobelOperator, &QAction::triggered, this, &MainWindow::onPressSobel);
     connect(gaborOperator, &QAction::triggered, this, &MainWindow::onPressGabor);
     filterMenu->addAction(sobelOperator);
     filterMenu->addAction(gaborOperator);
+    filterMenu->addAction(gaussOperator);
     QMenu *algorithms;
     algorithms = menuBar()->addMenu("algorithms");
 
@@ -70,7 +78,8 @@ void MainWindow::onPressLoadImage() {
     hsvSlider->setImage(image);
     hsvSlider->setOriginalImage(image);
     hsvSlider->resetSliders();
-    imageViewer->setPixmap(QPixmap::fromImage(image));
+    this->origPixmap = QPixmap::fromImage(image);
+    imageViewer->setPixmap(origPixmap);
 
 }
 
@@ -96,13 +105,40 @@ void MainWindow::onPressSaveImage() {
 
 void MainWindow::onPressGabor() {
     qDebug() << "Gabor";
+    ParamDialog dlg(this, QString("gabor param"));
+    connect(&dlg, SIGNAL(applied()), SLOT(onApplied()));
+    switch (dlg.exec()) {
+        case QDialog::Accepted:
+            qDebug() << "Accepted";
+            break;
+        case QDialog::Rejected:
+            qDebug() << "Rejected";
+            break;
+        default:
+            qDebug() << "Unexpected";
+    }
 
 
 }
 
 void MainWindow::onPressSobel() {
-    qDebug() << "Sobel";
-
+    ParamDialog dlg(this, QString("sobel threshold[0-255]"));
+    switch (dlg.exec()) {
+        case QDialog::Accepted: {
+            qDebug() << "Accepted";
+            auto outImg = Filters::sobelFilter(imageViewer->pixmap().toImage(),
+                                               dlg.getEditStr()->text().toInt()); /// no handle input
+            imageViewer->setPixmap(QPixmap::fromImage(outImg));
+            hsvSlider->setOriginalImage(outImg);
+            hsvSlider->setImage(outImg);
+            break;
+        }
+        case QDialog::Rejected:
+            qDebug() << "Rejected";
+            break;
+        default:
+            qDebug() << "Unexpected";
+    }
 
 }
 
@@ -150,6 +186,47 @@ void MainWindow::onPressHistogram() {
     QProcess p;
     p.start("python", arguments);
     p.waitForFinished();
+
+
+}
+
+void MainWindow::onPressGauss() {
+    ParamDialog dlg(this, QString("sigma, kernel_size "));
+    switch (dlg.exec()) {
+        case QDialog::Accepted: { ///no validation
+            qDebug() << "Accepted";
+            auto params = dlg.getEditStr()->text().split(",");
+            auto sigma = params[0].toDouble();
+            auto kernelSize = params[1].toInt();
+            auto outImg = Filters::gaussFilter(imageViewer->pixmap().toImage(), sigma, kernelSize);
+            imageViewer->setPixmap(QPixmap::fromImage(outImg));
+            hsvSlider->setOriginalImage(outImg);
+            hsvSlider->setImage(outImg);
+            break;
+        }
+        case QDialog::Rejected:
+            qDebug() << "Rejected";
+            break;
+        default:
+            qDebug() << "Unexpected";
+    }
+
+}
+
+const QPixmap &MainWindow::getOrigPixmap() const {
+    return origPixmap;
+}
+
+void MainWindow::setOrigPixmap(const QPixmap &origPixmap) {
+    MainWindow::origPixmap = origPixmap;
+}
+
+void MainWindow::onPressResetImage() {
+    imageViewer->setPixmap(origPixmap);
+    auto image = origPixmap.toImage();
+    hsvSlider->setImage(image);
+    hsvSlider->setOriginalImage(image);
+    hsvSlider->resetSliders();
 
 
 }

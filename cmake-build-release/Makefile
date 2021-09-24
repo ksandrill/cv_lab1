@@ -213,6 +213,54 @@ MainWindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/MainWindow.cpp.s
 .PHONY : MainWindow.cpp.s
 
+ParamDialog.obj: ParamDialog.cpp.obj
+.PHONY : ParamDialog.obj
+
+# target to build an object file
+ParamDialog.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/ParamDialog.cpp.obj
+.PHONY : ParamDialog.cpp.obj
+
+ParamDialog.i: ParamDialog.cpp.i
+.PHONY : ParamDialog.i
+
+# target to preprocess a source file
+ParamDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/ParamDialog.cpp.i
+.PHONY : ParamDialog.cpp.i
+
+ParamDialog.s: ParamDialog.cpp.s
+.PHONY : ParamDialog.s
+
+# target to generate assembly for a file
+ParamDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/ParamDialog.cpp.s
+.PHONY : ParamDialog.cpp.s
+
+algorithms/filters.obj: algorithms/filters.cpp.obj
+.PHONY : algorithms/filters.obj
+
+# target to build an object file
+algorithms/filters.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/filters.cpp.obj
+.PHONY : algorithms/filters.cpp.obj
+
+algorithms/filters.i: algorithms/filters.cpp.i
+.PHONY : algorithms/filters.i
+
+# target to preprocess a source file
+algorithms/filters.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/filters.cpp.i
+.PHONY : algorithms/filters.cpp.i
+
+algorithms/filters.s: algorithms/filters.cpp.s
+.PHONY : algorithms/filters.s
+
+# target to generate assembly for a file
+algorithms/filters.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/filters.cpp.s
+.PHONY : algorithms/filters.cpp.s
+
 image_transform_autogen/mocs_compilation.obj: image_transform_autogen/mocs_compilation.cpp.obj
 .PHONY : image_transform_autogen/mocs_compilation.obj
 
@@ -280,6 +328,12 @@ help:
 	@echo ... MainWindow.obj
 	@echo ... MainWindow.i
 	@echo ... MainWindow.s
+	@echo ... ParamDialog.obj
+	@echo ... ParamDialog.i
+	@echo ... ParamDialog.s
+	@echo ... algorithms/filters.obj
+	@echo ... algorithms/filters.i
+	@echo ... algorithms/filters.s
 	@echo ... image_transform_autogen/mocs_compilation.obj
 	@echo ... image_transform_autogen/mocs_compilation.i
 	@echo ... image_transform_autogen/mocs_compilation.s
