@@ -237,6 +237,30 @@ ParamDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/ParamDialog.cpp.s
 .PHONY : ParamDialog.cpp.s
 
+algorithms/algorithms.obj: algorithms/algorithms.cpp.obj
+.PHONY : algorithms/algorithms.obj
+
+# target to build an object file
+algorithms/algorithms.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj
+.PHONY : algorithms/algorithms.cpp.obj
+
+algorithms/algorithms.i: algorithms/algorithms.cpp.i
+.PHONY : algorithms/algorithms.i
+
+# target to preprocess a source file
+algorithms/algorithms.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.i
+.PHONY : algorithms/algorithms.cpp.i
+
+algorithms/algorithms.s: algorithms/algorithms.cpp.s
+.PHONY : algorithms/algorithms.s
+
+# target to generate assembly for a file
+algorithms/algorithms.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.s
+.PHONY : algorithms/algorithms.cpp.s
+
 algorithms/filters.obj: algorithms/filters.cpp.obj
 .PHONY : algorithms/filters.obj
 
@@ -331,6 +355,9 @@ help:
 	@echo ... ParamDialog.obj
 	@echo ... ParamDialog.i
 	@echo ... ParamDialog.s
+	@echo ... algorithms/algorithms.obj
+	@echo ... algorithms/algorithms.i
+	@echo ... algorithms/algorithms.s
 	@echo ... algorithms/filters.obj
 	@echo ... algorithms/filters.i
 	@echo ... algorithms/filters.s

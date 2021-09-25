@@ -16,6 +16,7 @@
 #include <QImageWriter>
 #include "algorithms/filters.h"
 #include "ParamDialog.h"
+#include "algorithms//algorithms.h"
 
 MainWindow::MainWindow(const QString &title, int minW, int minH, QWidget *parent) : QMainWindow(parent) {
     qDebug() << "main_window_size: " << this->size();
@@ -54,8 +55,11 @@ MainWindow::MainWindow(const QString &title, int minW, int minH, QWidget *parent
     filterMenu->addAction(sobelOperator);
     filterMenu->addAction(gaborOperator);
     filterMenu->addAction(gaussOperator);
-    QMenu *algorithms;
-    algorithms = menuBar()->addMenu("algorithms");
+    QMenu *algoMenu;
+    algoMenu = menuBar()->addMenu("algorithms");
+    auto *otsu = new QAction("Otsu", this);
+    connect(otsu, &QAction::triggered, this, &MainWindow::onPressOtsu);
+    algoMenu->addAction(otsu);
 
 
 }
@@ -238,6 +242,13 @@ void MainWindow::onPressResetImage() {
     hsvSlider->resetSliders();
 
 
+}
+
+void MainWindow::onPressOtsu() {
+    auto outImg = Algorithms::OtsuBinarization(imageViewer->pixmap().toImage());
+    imageViewer->setPixmap(QPixmap::fromImage(outImg));
+    hsvSlider->setOriginalImage(outImg);
+    hsvSlider->setImage(outImg);
 }
 
 

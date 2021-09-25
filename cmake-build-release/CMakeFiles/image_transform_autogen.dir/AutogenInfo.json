@@ -279,6 +279,12 @@
 			null
 		],
 		[
+			"E:/prog/clion_proj/image_transform/algorithms/algorithms.h",
+			"MU",
+			"3GWYZJVA2L/moc_algorithms.cpp",
+			null
+		],
+		[
 			"E:/prog/clion_proj/image_transform/algorithms/filters.h",
 			"MU",
 			"3GWYZJVA2L/moc_filters.cpp",
@@ -364,6 +370,11 @@
 		[ "E:/prog/clion_proj/image_transform/LabImageViewer.cpp", "MU", null ],
 		[ "E:/prog/clion_proj/image_transform/MainWindow.cpp", "MU", null ],
 		[ "E:/prog/clion_proj/image_transform/ParamDialog.cpp", "MU", null ],
+		[
+			"E:/prog/clion_proj/image_transform/algorithms/algorithms.cpp",
+			"MU",
+			null
+		],
 		[
 			"E:/prog/clion_proj/image_transform/algorithms/filters.cpp",
 			"MU",

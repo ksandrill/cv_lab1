@@ -1301,3 +1301,5 @@ E:/prog/clion_proj/image_transform/ParamDialog.h
  mdp:D:/Qt_lib/Tools/mingw810_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/Qt_lib/Tools/mingw810_64/x86_64-w64-mingw32/include/wctype.h
 E:/prog/clion_proj/image_transform/ParamDialog.cpp
+E:/prog/clion_proj/image_transform/algorithms/algorithms.h
+E:/prog/clion_proj/image_transform/algorithms/algorithms.cpp

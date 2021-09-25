@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-D:/Qt_lib/6.1.3/mingw81_64/include/QtCore/QDebug
-qdebug.h
-D:/Qt_lib/6.1.3/mingw81_64/include/QtCore/qdebug.h
-
 D:/Qt_lib/6.1.3/mingw81_64/include/QtCore/qalgorithms.h
 QtCore/qglobal.h
 -
@@ -950,15 +946,19 @@ D:/Qt_lib/6.1.3/mingw81_64/include/QtGui/qwindowdefs_win.h
 QtGui/qtguiglobal.h
 -
 
-E:/prog/clion_proj/image_transform/algorithms/filters.cpp
-filters.h
-E:/prog/clion_proj/image_transform/algorithms/filters.h
+E:/prog/clion_proj/image_transform/algorithms/algorithms.cpp
+algorithm
+-
+algorithms.h
+E:/prog/clion_proj/image_transform/algorithms/algorithms.h
 cmath
 E:/prog/clion_proj/image_transform/algorithms/cmath
-QDebug
-E:/prog/clion_proj/image_transform/algorithms/QDebug
+qdebug.h
+E:/prog/clion_proj/image_transform/algorithms/qdebug.h
 
-E:/prog/clion_proj/image_transform/algorithms/filters.h
+E:/prog/clion_proj/image_transform/algorithms/algorithms.h
+vector
+-
 QImage
 -
 

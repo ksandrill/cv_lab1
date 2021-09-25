@@ -46,7 +46,7 @@ private slots:
     void onPressSobel();
 
     void onPressGauss();
-
+    void onPressOtsu();
 
 };
 

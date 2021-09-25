@@ -162,6 +162,12 @@
 		<Unit filename="E:/prog/clion_proj/image_transform/ParamDialog.h">
 			<Option target="image_transform"/>
 		</Unit>
+		<Unit filename="E:/prog/clion_proj/image_transform/algorithms/algorithms.cpp">
+			<Option target="image_transform"/>
+		</Unit>
+		<Unit filename="E:/prog/clion_proj/image_transform/algorithms/algorithms.h">
+			<Option target="image_transform"/>
+		</Unit>
 		<Unit filename="E:/prog/clion_proj/image_transform/algorithms/filters.cpp">
 			<Option target="image_transform"/>
 		</Unit>

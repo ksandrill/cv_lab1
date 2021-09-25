@@ -163,6 +163,20 @@ CMakeFiles/image_transform.dir/ParamDialog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/image_transform.dir/ParamDialog.cpp.s"
 	D:\Qt_lib\Tools\mingw810_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\prog\clion_proj\image_transform\ParamDialog.cpp -o CMakeFiles\image_transform.dir\ParamDialog.cpp.s
 
+CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj: CMakeFiles/image_transform.dir/flags.make
+CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj: CMakeFiles/image_transform.dir/includes_CXX.rsp
+CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj: ../algorithms/algorithms.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\prog\clion_proj\image_transform\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj"
+	D:\Qt_lib\Tools\mingw810_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\image_transform.dir\algorithms\algorithms.cpp.obj -c E:\prog\clion_proj\image_transform\algorithms\algorithms.cpp
+
+CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.i"
+	D:\Qt_lib\Tools\mingw810_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\prog\clion_proj\image_transform\algorithms\algorithms.cpp > CMakeFiles\image_transform.dir\algorithms\algorithms.cpp.i
+
+CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.s"
+	D:\Qt_lib\Tools\mingw810_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\prog\clion_proj\image_transform\algorithms\algorithms.cpp -o CMakeFiles\image_transform.dir\algorithms\algorithms.cpp.s
+
 # Object files for target image_transform
 image_transform_OBJECTS = \
 "CMakeFiles/image_transform.dir/image_transform_autogen/mocs_compilation.cpp.obj" \
@@ -171,7 +185,8 @@ image_transform_OBJECTS = \
 "CMakeFiles/image_transform.dir/LabImageViewer.cpp.obj" \
 "CMakeFiles/image_transform.dir/HsvSlider.cpp.obj" \
 "CMakeFiles/image_transform.dir/algorithms/filters.cpp.obj" \
-"CMakeFiles/image_transform.dir/ParamDialog.cpp.obj"
+"CMakeFiles/image_transform.dir/ParamDialog.cpp.obj" \
+"CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj"
 
 # External object files for target image_transform
 image_transform_EXTERNAL_OBJECTS =
@@ -183,6 +198,7 @@ image_transform.exe: CMakeFiles/image_transform.dir/LabImageViewer.cpp.obj
 image_transform.exe: CMakeFiles/image_transform.dir/HsvSlider.cpp.obj
 image_transform.exe: CMakeFiles/image_transform.dir/algorithms/filters.cpp.obj
 image_transform.exe: CMakeFiles/image_transform.dir/ParamDialog.cpp.obj
+image_transform.exe: CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj
 image_transform.exe: CMakeFiles/image_transform.dir/build.make
 image_transform.exe: D:/Qt_lib/6.1.3/mingw81_64/lib/libQt6Charts.a
 image_transform.exe: D:/Qt_lib/6.1.3/mingw81_64/lib/libQt6OpenGLWidgets.a
@@ -195,7 +211,7 @@ image_transform.exe: D:/Qt_lib/Tools/mingw810_64/x86_64-w64-mingw32/lib/libmingw
 image_transform.exe: CMakeFiles/image_transform.dir/linklibs.rsp
 image_transform.exe: CMakeFiles/image_transform.dir/objects1.rsp
 image_transform.exe: CMakeFiles/image_transform.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\prog\clion_proj\image_transform\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable image_transform.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\prog\clion_proj\image_transform\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable image_transform.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\image_transform.dir\link.txt --verbose=$(VERBOSE)
 	"E:\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E make_directory E:/prog/clion_proj/image_transform/cmake-build-debug/plugins/platforms/
 	"E:\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E copy D:/Qt_lib/6.1.3/mingw81_64/lib/cmake/../../plugins/platforms/qwindows.dll E:/prog/clion_proj/image_transform/cmake-build-debug/plugins/platforms/
