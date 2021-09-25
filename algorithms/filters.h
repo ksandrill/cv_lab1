@@ -7,7 +7,7 @@
 #ifndef IMAGE_TRANSFORM_FILTERS_H
 #define IMAGE_TRANSFORM_FILTERS_H
 namespace Filters {
-    QImage sobelFilter(const QImage &inputImg, int threshold = 255);
+    QImage sobelFilter(const QImage &inputImg);
 
     QImage gaussFilter(const QImage &inputImg, double sigma, int kernelSize);
 

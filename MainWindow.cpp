@@ -135,23 +135,10 @@ void MainWindow::onPressGabor() {
 }
 
 void MainWindow::onPressSobel() {
-    ParamDialog dlg(this, QString("sobel threshold[0-255]"));
-    switch (dlg.exec()) {
-        case QDialog::Accepted: {
-            qDebug() << "Accepted";
-            auto outImg = Filters::sobelFilter(imageViewer->pixmap().toImage(),
-                                               dlg.getEditStr()->text().toInt()); /// no handle input
-            imageViewer->setPixmap(QPixmap::fromImage(outImg));
-            hsvSlider->setOriginalImage(outImg);
-            hsvSlider->setImage(outImg);
-            break;
-        }
-        case QDialog::Rejected:
-            qDebug() << "Rejected";
-            break;
-        default:
-            qDebug() << "Unexpected";
-    }
+    auto outImg = Filters::sobelFilter(imageViewer->pixmap().toImage()); /// no handle input
+    imageViewer->setPixmap(QPixmap::fromImage(outImg));
+    hsvSlider->setOriginalImage(outImg);
+    hsvSlider->setImage(outImg);
 
 }
 

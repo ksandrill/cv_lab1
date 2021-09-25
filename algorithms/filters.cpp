@@ -6,7 +6,17 @@
 #include "cmath"
 #include "QDebug"
 
-QImage Filters::sobelFilter(const QImage &inputImg, int threshold) {
+int fit(int min, int max, int val) {
+    if (val < min) {
+        val = min;
+    } else if (val > max) {
+        val = max;
+    }
+    return val;
+}
+
+
+QImage Filters::sobelFilter(const QImage &inputImg) {
     int divX[3][3] = {{-1, 0, 1},
                       {-2, 0, 2},
                       {-1, 0, 1}};
@@ -14,36 +24,37 @@ QImage Filters::sobelFilter(const QImage &inputImg, int threshold) {
                       {0,  0,  0,},
                       {1,  2,  1}};
     QImage outImg = inputImg.copy();
-    int x_len = inputImg.width() - 2;
-    int y_len = inputImg.height() - 2;
-    int y_out = 1;
-    for (int j = 0; j < y_len; ++j) {
-        int x_out = 1;
-        for (int i = 0; i < x_len; ++i) {
-            double sum_x = 0;
-            double sum_y = 0;
-            for (int kernel_j = 0; kernel_j < 3; ++kernel_j) {
-                for (int kernel_i = 0; kernel_i < 3; ++kernel_i) {
-                    QColor pixel = inputImg.pixelColor(i + kernel_i, j + kernel_j);
+    int xLen = inputImg.width() - 2;
+    int yLen = inputImg.height() - 2;
+    int yOut = 1;
+    for (int j = 0; j < yLen; ++j) {
+        int xOut = 1;
+        for (int i = 0; i < xLen; ++i) {
+            double sumX = 0;
+            double sumY = 0;
+            for (int kernelJ = 0; kernelJ < 3; ++kernelJ) {
+                for (int kernelI = 0; kernelI < 3; ++kernelI) {
+                    QColor pixel = inputImg.pixelColor(i + kernelI, j + kernelJ);
                     double grayScale = pixel.red() * 0.299 + pixel.green() * 0.587 + pixel.blue() * 0.114;
-                    sum_x += (grayScale * divX[kernel_i][kernel_j]);
-                    sum_y += (grayScale * divY[kernel_i][kernel_j]);
+                    sumX += (grayScale * divX[kernelI][kernelJ]);
+                    sumY += (grayScale * divY[kernelI][kernelJ]);
                 }
             }
-            int img_value = int(sqrt(pow(sum_x, 2) + pow(sum_y, 2)));
-            img_value = img_value > threshold ? 255 : 0;
-            outImg.setPixel(x_out, y_out, QColor(img_value, img_value, img_value).rgb());
-            x_out++;
+            int imgValue = int(sqrt(pow(sumX, 2) + pow(sumY, 2)));
+            ///imgValue = imgValue > threshold ? 255 : 0;
+            imgValue = fit(0, 255, imgValue);
+            outImg.setPixel(xOut, yOut, QColor(imgValue, imgValue, imgValue).rgb());
+            xOut++;
         }
-        y_out++;
+        yOut++;
     }
     return outImg;
 }
 
 double gauss(double sigma, int x, int y) {
     double gaussParam = 1 / (2 * M_PI * pow(sigma, 2));
-    double exp_argue = -(pow(x, 2) + pow(y, 2)) / (2 * pow(sigma, 2));
-    return gaussParam * exp(exp_argue);
+    double expArgue = -(pow(x, 2) + pow(y, 2)) / (2 * pow(sigma, 2));
+    return gaussParam * exp(expArgue);
 }
 
 
@@ -65,28 +76,31 @@ QImage Filters::gaussFilter(const QImage &inputImg, double sigma, int kernelSize
             gaussKernel[i][j] /= sum;
         }
     }
-    int x_len = inputImg.width() - kernelSize + 1;
-    int y_len = inputImg.height() - kernelSize + 1;
-    int y_out = 1;
-    for (int j = 0; j < y_len; ++j) {
-        int x_out = 1;
-        for (int i = 0; i < x_len; ++i) {
+    int xLen = inputImg.width() - kernelSize + 1;
+    int yLen = inputImg.height() - kernelSize + 1;
+    int yOut = 1;
+    for (int j = 0; j < yLen; ++j) {
+        int xOut = 1;
+        for (int i = 0; i < xLen; ++i) {
             double r_sum = 0;
             double g_sum = 0;
             double b_sum = 0;
-            for (int kernel_j = 0; kernel_j < kernelSize; ++kernel_j) {
-                for (int kernel_i = 0; kernel_i < kernelSize; ++kernel_i) {
-                    QColor pixel = inputImg.pixelColor(i + kernel_i, j + kernel_j);
-                    r_sum += pixel.red() * gaussKernel[kernel_i][kernel_j];
-                    g_sum += pixel.green() * gaussKernel[kernel_i][kernel_j];
-                    b_sum += pixel.blue() * gaussKernel[kernel_i][kernel_j];
+            for (int kernelJ = 0; kernelJ < kernelSize; ++kernelJ) {
+                for (int kernelI = 0; kernelI < kernelSize; ++kernelI) {
+                    QColor pixel = inputImg.pixelColor(i + kernelI, j + kernelJ);
+                    r_sum += pixel.red() * gaussKernel[kernelI][kernelJ];
+                    g_sum += pixel.green() * gaussKernel[kernelI][kernelJ];
+                    b_sum += pixel.blue() * gaussKernel[kernelI][kernelJ];
                 }
             }
-            outImg.setPixel(x_out, y_out,
-                            QColor(int(r_sum), int(g_sum), int(b_sum)).rgb());
-            x_out++;
+            int rValue = fit(0, 255, int(r_sum));
+            int gValue = fit(0, 255, int(g_sum));
+            int bValue = fit(0, 255, int(b_sum));
+            outImg.setPixel(xOut, yOut,
+                            QColor(rValue, gValue, bValue).rgb());
+            xOut++;
         }
-        y_out++;
+        yOut++;
     }
 
 
@@ -99,14 +113,6 @@ double gaborFunc(double xSh, double ySh, double lambda, double gama, double phi,
     return exp(-(pow(xSh, 2) + gama * pow(ySh, 2)) / (2 * pow(sigma, 2))) * cos(2 * M_PI * xSh / lambda + phi);
 }
 
-int fit(int min, int max, int val) {
-    if (val < min) {
-        val = min;
-    } else if (val > max) {
-        val = max;
-    }
-    return val;
-}
 
 QImage
 Filters::gaborFilter(const QImage &inputImg, double lambda, double theta, double phi, double gama, int kernelSize) {
@@ -131,36 +137,36 @@ Filters::gaborFilter(const QImage &inputImg, double lambda, double theta, double
             gaborKernel[i][j] /= sum;
         }
     }
-    int x_len = inputImg.width() - kernelSize + 1;
-    int y_len = inputImg.height() - kernelSize + 1;
-    int y_out = 1;
-    for (int j = 0; j < y_len; ++j) {
-        int x_out = 1;
-        for (int i = 0; i < x_len; ++i) {
+    int xLen = inputImg.width() - kernelSize + 1;
+    int yLen = inputImg.height() - kernelSize + 1;
+    int yOut = 1;
+    for (int j = 0; j < yLen; ++j) {
+        int xOut = 1;
+        for (int i = 0; i < xLen; ++i) {
             ////double convSum = 0;
-            double r_sum = 0;
-            double g_sum = 0;
-            double b_sum = 0;
+            double rSum = 0;
+            double gSum = 0;
+            double bSum = 0;
             for (int kernel_j = 0; kernel_j < kernelSize; ++kernel_j) {
                 for (int kernel_i = 0; kernel_i < kernelSize; ++kernel_i) {
                     QColor pixel = inputImg.pixelColor(i + kernel_i, j + kernel_j);
                     ////double grayScale = pixel.red() * 0.299 + pixel.green() * 0.587 + pixel.blue() * 0.114;
                     ////convSum += grayScale * gaborKernel[kernel_i][kernel_j];
-                    r_sum += pixel.red() * gaborKernel[kernel_i][kernel_j];
-                    g_sum += pixel.green() * gaborKernel[kernel_i][kernel_j];
-                    b_sum += pixel.blue() * gaborKernel[kernel_i][kernel_j];
+                    rSum += pixel.red() * gaborKernel[kernel_i][kernel_j];
+                    gSum += pixel.green() * gaborKernel[kernel_i][kernel_j];
+                    bSum += pixel.blue() * gaborKernel[kernel_i][kernel_j];
                 }
             }
             ////auto value = fit(0, 255, int(convSum));
-            auto r_value = fit(0, 255, int(r_sum));
-            auto g_value = fit(0, 255, int(g_sum));
-            auto b_value = fit(0, 255, int(b_sum));
+            auto rValue = fit(0, 255, int(rSum));
+            auto gValue = fit(0, 255, int(gSum));
+            auto bValue = fit(0, 255, int(bSum));
 
-            outImg.setPixel(x_out, y_out,
-                            QColor(r_value, g_value, b_value).rgb());
-            x_out++;
+            outImg.setPixel(xOut, yOut,
+                            QColor(rValue, gValue, bValue).rgb());
+            xOut++;
         }
-        y_out++;
+        yOut++;
     }
 
 

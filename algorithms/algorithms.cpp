@@ -8,14 +8,13 @@
 #include "qdebug.h"
 
 int Algorithms::getOtsuThreshold(const std::vector<int> &grayScaleVector) {
-    auto minmax = std::minmax_element(std::begin(grayScaleVector), std::end(grayScaleVector));
-    int min = *(minmax.first);
-    int max = *(minmax.second);
+    const auto &[min_it, max_it] = std::minmax_element(std::cbegin(grayScaleVector), std::cend(grayScaleVector));
+    auto [min, max] = std::tie(*min_it, *max_it);
     auto histVector = std::vector<int>(max - min, 0);
     if (histVector.empty()) {
         return 0;
     }
-    qDebug() << grayScaleVector[0] << " " << min << " " << max;
+    /////qDebug() << grayScaleVector[0] << " " << min << " " << max;
     for (auto value: grayScaleVector) {
         histVector[value - min] += 1;
     }
