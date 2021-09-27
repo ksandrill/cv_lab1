@@ -48,6 +48,7 @@ private slots:
     void onPressGauss();
     void onPressOtsu();
 
+    void onPressKanny();
 };
 
 

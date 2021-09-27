@@ -59,7 +59,10 @@ MainWindow::MainWindow(const QString &title, int minW, int minH, QWidget *parent
     algoMenu = menuBar()->addMenu("algorithms");
     auto *otsu = new QAction("Otsu", this);
     connect(otsu, &QAction::triggered, this, &MainWindow::onPressOtsu);
+    auto *kanny = new QAction("kanny", this);
+    connect(kanny, &QAction::triggered, this, &MainWindow::onPressKanny);
     algoMenu->addAction(otsu);
+    algoMenu->addAction(kanny);
 
 
 }
@@ -238,4 +241,29 @@ void MainWindow::onPressOtsu() {
     hsvSlider->setImage(outImg);
 }
 
+void MainWindow::onPressKanny() {
 
+
+    ParamDialog dlg(this, QString("sigma, kernel_size, low_thr, high_thr "));
+    switch (dlg.exec()) {
+        case QDialog::Accepted: { ///no validation
+            qDebug() << "Accepted";
+            auto params = dlg.getEditStr()->text().split(",");
+            auto sigma = params[0].toDouble();
+            auto kernelSize = params[1].toInt();
+            auto lowThr = params[2].toInt();
+            auto HighThr = params[3].toInt();
+            auto outImg = Algorithms::CannyEdgeDetection(imageViewer->pixmap().toImage(), sigma, kernelSize, lowThr,
+                                                         HighThr);
+            imageViewer->setPixmap(QPixmap::fromImage(outImg));
+            hsvSlider->setOriginalImage(outImg);
+            hsvSlider->setImage(outImg);
+            break;
+        }
+        case QDialog::Rejected:
+            qDebug() << "Rejected";
+            break;
+        default:
+            qDebug() << "Unexpected";
+    }
+}

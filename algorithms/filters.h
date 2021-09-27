@@ -12,6 +12,8 @@ namespace Filters {
     QImage gaussFilter(const QImage &inputImg, double sigma, int kernelSize);
 
     QImage gaborFilter(const QImage &inputImg, double lambda, double theta, double phi, double gama, int kernelSize);
+
+    std::tuple<QImage, std::vector<double>> sobelWithGradients(const QImage &inputImg);
 }
 
 #endif //IMAGE_TRANSFORM_FILTERS_H

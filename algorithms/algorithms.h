@@ -10,7 +10,11 @@
 
 namespace Algorithms {
     int getOtsuThreshold(const std::vector<int> &grayScaleVector);
+
     QImage OtsuBinarization(const QImage &inputImage);
+
+    QImage CannyEdgeDetection(const QImage &inputImage, double gaussSigma, int gaussKernelSize, int lowThreshold = 100,
+                              int highThreshold = 250);
 }
 
 #endif //IMAGE_TRANSFORM_ALGORITHMS_H

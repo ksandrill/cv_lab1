@@ -26,14 +26,14 @@ QImage Filters::sobelFilter(const QImage &inputImg) {
     QImage outImg = inputImg.copy();
     int xLen = inputImg.width() - 2;
     int yLen = inputImg.height() - 2;
-    int yOut = 1;
-    for (int j = 0; j < yLen; ++j) {
-        int xOut = 1;
-        for (int i = 0; i < xLen; ++i) {
+    int xOut = 1;
+    for (int i = 0; i < xLen; ++i) {
+        int yOut = 1;
+        for (int j = 0; j < yLen; ++j) {
             double sumX = 0;
             double sumY = 0;
-            for (int kernelJ = 0; kernelJ < 3; ++kernelJ) {
-                for (int kernelI = 0; kernelI < 3; ++kernelI) {
+            for (int kernelI = 0; kernelI < 3; ++kernelI) {
+                for (int kernelJ = 0; kernelJ < 3; ++kernelJ) {
                     QColor pixel = inputImg.pixelColor(i + kernelI, j + kernelJ);
                     double grayScale = pixel.red() * 0.299 + pixel.green() * 0.587 + pixel.blue() * 0.114;
                     sumX += (grayScale * divX[kernelI][kernelJ]);
@@ -41,12 +41,11 @@ QImage Filters::sobelFilter(const QImage &inputImg) {
                 }
             }
             int imgValue = int(sqrt(pow(sumX, 2) + pow(sumY, 2)));
-            ///imgValue = imgValue > threshold ? 255 : 0;
             imgValue = fit(0, 255, imgValue);
             outImg.setPixel(xOut, yOut, QColor(imgValue, imgValue, imgValue).rgb());
-            xOut++;
+            yOut++;
         }
-        yOut++;
+        xOut++;
     }
     return outImg;
 }
@@ -57,6 +56,45 @@ double gauss(double sigma, int x, int y) {
     return gaussParam * exp(expArgue);
 }
 
+std::tuple<QImage, std::vector<double>> Filters::sobelWithGradients(const QImage &inputImg) {
+    int divX[3][3] = {{-1, 0, 1},
+                      {-2, 0, 2},
+                      {-1, 0, 1}};
+    int divY[3][3] = {{-1, -2, -1},
+                      {0,  0,  0,},
+                      {1,  2,  1}};
+    QImage outImg = inputImg.copy();
+    int xLen = inputImg.width() - 2;
+    int yLen = inputImg.height() - 2;
+    int xOut = 1;
+    std::vector<double> gradAngleVector(0);
+    for (int i = 0; i < xLen; ++i) {
+        int yOut = 1;
+        for (int j = 0; j < yLen; ++j) {
+            double sumX = 0;
+            double sumY = 0;
+            for (int kernelI = 0; kernelI < 3; ++kernelI) {
+                for (int kernelJ = 0; kernelJ < 3; ++kernelJ) {
+                    QColor pixel = inputImg.pixelColor(i + kernelI, j + kernelJ);
+                    double grayScale = pixel.red() * 0.299 + pixel.green() * 0.587 + pixel.blue() * 0.114;
+                    sumX += (grayScale * divX[kernelI][kernelJ]);
+                    sumY += (grayScale * divY[kernelI][kernelJ]);
+
+                }
+            }
+            double gradAngle = std::atan2(sumY, sumX) * (M_PI / 180) + 180;///get angle in [0,360]
+            gradAngleVector.emplace_back(gradAngle);
+            int imgValue = int(sqrt(pow(sumX, 2) + pow(sumY, 2)));
+            imgValue = fit(0, 255, imgValue);
+            outImg.setPixel(xOut, yOut, QColor(imgValue, imgValue, imgValue).rgb());
+            yOut++;
+        }
+        xOut++;
+    }
+    return {outImg, gradAngleVector};
+
+
+}
 
 QImage Filters::gaussFilter(const QImage &inputImg, double sigma, int kernelSize) {
     QImage outImg = inputImg.copy();
@@ -172,5 +210,6 @@ Filters::gaborFilter(const QImage &inputImg, double lambda, double theta, double
 
     return outImg;
 }
+
 
 
