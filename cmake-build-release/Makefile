@@ -285,6 +285,30 @@ algorithms/filters.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/filters.cpp.s
 .PHONY : algorithms/filters.cpp.s
 
+algorithms/segmentation.obj: algorithms/segmentation.cpp.obj
+.PHONY : algorithms/segmentation.obj
+
+# target to build an object file
+algorithms/segmentation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/segmentation.cpp.obj
+.PHONY : algorithms/segmentation.cpp.obj
+
+algorithms/segmentation.i: algorithms/segmentation.cpp.i
+.PHONY : algorithms/segmentation.i
+
+# target to preprocess a source file
+algorithms/segmentation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/segmentation.cpp.i
+.PHONY : algorithms/segmentation.cpp.i
+
+algorithms/segmentation.s: algorithms/segmentation.cpp.s
+.PHONY : algorithms/segmentation.s
+
+# target to generate assembly for a file
+algorithms/segmentation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\image_transform.dir\build.make CMakeFiles/image_transform.dir/algorithms/segmentation.cpp.s
+.PHONY : algorithms/segmentation.cpp.s
+
 image_transform_autogen/mocs_compilation.obj: image_transform_autogen/mocs_compilation.cpp.obj
 .PHONY : image_transform_autogen/mocs_compilation.obj
 
@@ -361,6 +385,9 @@ help:
 	@echo ... algorithms/filters.obj
 	@echo ... algorithms/filters.i
 	@echo ... algorithms/filters.s
+	@echo ... algorithms/segmentation.obj
+	@echo ... algorithms/segmentation.i
+	@echo ... algorithms/segmentation.s
 	@echo ... image_transform_autogen/mocs_compilation.obj
 	@echo ... image_transform_autogen/mocs_compilation.i
 	@echo ... image_transform_autogen/mocs_compilation.s

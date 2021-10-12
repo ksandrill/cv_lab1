@@ -49,6 +49,8 @@ private slots:
     void onPressOtsu();
 
     void onPressKanny();
+    void onPressMeanShift();
+    void onPressKmeans();
 };
 
 

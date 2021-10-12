@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "E:/prog/clion_proj/image_transform/ParamDialog.cpp" "E:/prog/clion_proj/image_transform/cmake-build-debug/CMakeFiles/image_transform.dir/ParamDialog.cpp.obj"
   "E:/prog/clion_proj/image_transform/algorithms/algorithms.cpp" "E:/prog/clion_proj/image_transform/cmake-build-debug/CMakeFiles/image_transform.dir/algorithms/algorithms.cpp.obj"
   "E:/prog/clion_proj/image_transform/algorithms/filters.cpp" "E:/prog/clion_proj/image_transform/cmake-build-debug/CMakeFiles/image_transform.dir/algorithms/filters.cpp.obj"
+  "E:/prog/clion_proj/image_transform/algorithms/segmentation.cpp" "E:/prog/clion_proj/image_transform/cmake-build-debug/CMakeFiles/image_transform.dir/algorithms/segmentation.cpp.obj"
   "E:/prog/clion_proj/image_transform/cmake-build-debug/image_transform_autogen/mocs_compilation.cpp" "E:/prog/clion_proj/image_transform/cmake-build-debug/CMakeFiles/image_transform.dir/image_transform_autogen/mocs_compilation.cpp.obj"
   "E:/prog/clion_proj/image_transform/main.cpp" "E:/prog/clion_proj/image_transform/cmake-build-debug/CMakeFiles/image_transform.dir/main.cpp.obj"
   )

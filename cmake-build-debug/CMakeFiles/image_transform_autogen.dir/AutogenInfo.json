@@ -291,6 +291,12 @@
 			null
 		],
 		[
+			"E:/prog/clion_proj/image_transform/algorithms/segmentation.h",
+			"MU",
+			"3GWYZJVA2L/moc_segmentation.cpp",
+			null
+		],
+		[
 			"E:/prog/clion_proj/image_transform/colorsScheme.h",
 			"MU",
 			"EWIEGA46WW/moc_colorsScheme.cpp",
@@ -376,6 +382,11 @@
 		],
 		[
 			"E:/prog/clion_proj/image_transform/algorithms/filters.cpp",
+			"MU",
+			null
+		],
+		[
+			"E:/prog/clion_proj/image_transform/algorithms/segmentation.cpp",
 			"MU",
 			null
 		],

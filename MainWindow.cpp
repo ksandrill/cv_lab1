@@ -17,6 +17,7 @@
 #include "algorithms/filters.h"
 #include "ParamDialog.h"
 #include "algorithms//algorithms.h"
+#include "algorithms/segmentation.h"
 
 MainWindow::MainWindow(const QString &title, int minW, int minH, QWidget *parent) : QMainWindow(parent) {
     qDebug() << "main_window_size: " << this->size();
@@ -63,7 +64,12 @@ MainWindow::MainWindow(const QString &title, int minW, int minH, QWidget *parent
     connect(kanny, &QAction::triggered, this, &MainWindow::onPressKanny);
     algoMenu->addAction(otsu);
     algoMenu->addAction(kanny);
-
+    auto *meanShiftSegmentation = new QAction("Mean Shift seg", this);
+    connect(meanShiftSegmentation, &QAction::triggered, this, &MainWindow::onPressMeanShift);
+    algoMenu->addAction(meanShiftSegmentation);
+    auto *kmeansSegmentation = new QAction("K-means seg", this);
+    connect(kmeansSegmentation, &QAction::triggered, this, &MainWindow::onPressKmeans);
+    algoMenu->addAction(kmeansSegmentation);
 
 }
 
@@ -266,4 +272,64 @@ void MainWindow::onPressKanny() {
         default:
             qDebug() << "Unexpected";
     }
+}
+
+void MainWindow::onPressMeanShift() {
+    qDebug() << "MeanShift";
+    ParamDialog dlg(this, QString("iterations, radius, scaleFactor"));
+    switch (dlg.exec()) {
+        case QDialog::Accepted: {
+            auto params = dlg.getEditStr()->text().split(",");
+            auto iter = params[0].toInt();
+            auto radius = params[1].toFloat();
+            auto scaleFactor = params[2].toFloat();
+            auto inputImg = imageViewer->pixmap().toImage();
+            inputImg = inputImg.scaled(int(float(inputImg.width()) * scaleFactor),
+                                       int(float(inputImg.height()) * scaleFactor));
+
+            auto outImg = Segmentation::meanShiftSegmentation(inputImg, radius,
+                                                              iter);
+            outImg = outImg.scaled(imageViewer->pixmap().toImage().size());
+            imageViewer->setPixmap(QPixmap::fromImage(outImg));
+            hsvSlider->setOriginalImage(outImg);
+            hsvSlider->setImage(outImg);
+            break;
+        }
+        case QDialog::Rejected:
+            qDebug() << "Rejected";
+            break;
+        default:
+            qDebug() << "Unexpected";
+    }
+
+}
+
+void MainWindow::onPressKmeans() {
+    qDebug() << "kmeans";
+    ParamDialog dlg(this, QString("iterations, cluster_count, scaleFactor"));
+    switch (dlg.exec()) {
+        case QDialog::Accepted: {
+            auto params = dlg.getEditStr()->text().split(",");
+            auto iter = params[0].toInt();
+            auto cluster_count = params[1].toInt();
+            auto scaleFactor = params[2].toFloat();
+            auto inputImg = imageViewer->pixmap().toImage();
+            inputImg = inputImg.scaled(int(float(inputImg.width()) * scaleFactor),
+                                       int(float(inputImg.height()) * scaleFactor));
+
+            auto outImg = Segmentation::kMeansSegmentation(inputImg, cluster_count,
+                                                           iter);
+            outImg = outImg.scaled(imageViewer->pixmap().toImage().size());
+            imageViewer->setPixmap(QPixmap::fromImage(outImg));
+            hsvSlider->setOriginalImage(outImg);
+            hsvSlider->setImage(outImg);
+            break;
+        }
+        case QDialog::Rejected:
+            qDebug() << "Rejected";
+            break;
+        default:
+            qDebug() << "Unexpected";
+    }
+
 }
